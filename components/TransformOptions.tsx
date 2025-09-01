@@ -127,7 +127,7 @@ export const TransformOptions: React.FC<TransformOptionsProps> = ({ currentOptio
                     <OptionGroup label={t('colorSchemeLabel')} options={colorSchemes} selectedValue={currentOptions.colorScheme} onChange={(v) => handleOptionChange('colorScheme', v)} />
                     <OptionGroup label={t('detailingLabel')} options={detailings} selectedValue={currentOptions.detailing} onChange={(v) => handleOptionChange('detailing', v)} />
                 </div>
-            </section>
+            </Section>
         </div>
     );
 };
