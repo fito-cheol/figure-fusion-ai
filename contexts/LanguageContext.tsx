@@ -33,8 +33,6 @@ const translations = {
       errorUpload: "Please upload an image first.",
       errorGenerate: "The AI could not generate an image. Please try a different image or adjust the options.",
       errorTransform: "An error occurred while transforming the image. Please try again.",
-      // Footer
-      footerCredit: "Powered by Google Gemini. Designed by a world-class React engineer.",
       // TransformOptions
       customizeTitle: "Customize Your Figure",
       coreConceptSection: "Core Concept",
@@ -119,7 +117,6 @@ const translations = {
       errorUpload: "먼저 이미지를 업로드해주세요.",
       errorGenerate: "AI가 이미지를 생성하지 못했습니다. 다른 이미지를 사용하거나 옵션을 조정해보세요.",
       errorTransform: "이미지를 변환하는 중 오류가 발생했습니다. 다시 시도해주세요.",
-      footerCredit: "Google Gemini 기반. 세계적 수준의 React 엔지니어가 설계했습니다.",
       customizeTitle: "피규어 커스터마이징",
       coreConceptSection: "핵심 컨셉",
       physicalPropertiesSection: "물리적 속성",

@@ -105,8 +105,8 @@ Your task is to take the user's uploaded image and transform the main subject in
 
 **FINAL IMAGE COMPOSITION:**
 
-*   **Aspect Ratio:** The final output image MUST be a high-resolution landscape photograph with a 16:9 aspect ratio. This is a strict, non-negotiable requirement.
-*   **Composition:** The arrangement of the figure and box must be HORIZONTAL to fill the wide 16:9 frame. DO NOT stack them vertically. The final image should be a cinematic, wide shot.
+*   **Resolution & Aspect Ratio:** The final output image MUST be a high-resolution landscape photograph with an exact resolution of 1920x1080 pixels (a 16:9 aspect ratio). This is a strict, non-negotiable requirement.
+*   **Composition:** The arrangement of the figure and box must be HORIZONTAL to fill the wide 1920x1080 frame. DO NOT stack them vertically. The final image should be a cinematic, wide shot.
 *   **Scene:** Create a single, cohesive professional product photograph.
 *   **Arrangement:** On the left side, display the collectible figure standing on its base. On the right side, display its corresponding retail packaging (box) standing upright.
 *   **Box Art:** Use the original uploaded image itself as the primary artwork on the packaging. The art should be vibrant and well-integrated into the box design, which should also feature a clear plastic window.
@@ -162,6 +162,9 @@ export const transformImageToFigure = async (
     return { imageUrl, text };
   } catch (error) {
     console.error("Error calling Gemini API:", error);
-    throw new Error("Failed to transform image with Gemini API.");
+    if (error instanceof Error) {
+        throw new Error(`Gemini API Error: ${error.message}`);
+    }
+    throw new Error("An unknown error occurred while transforming the image with the Gemini API.");
   }
 };

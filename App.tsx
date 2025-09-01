@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { Header } from './components/Header';
 import { ImageUploader } from './components/ImageUploader';
@@ -15,11 +14,11 @@ const initialFigureOptions: Omit<FigureOptions, 'mode'> = {
   artStyle: 'Anime',
   texture: 'Matte',
   base: 'Simple Disc',
-  material: 'PVC/ABS',
+  material: 'Polystone',
   pose: 'Standing',
   colorScheme: 'Original Colors',
   detailing: 'Standard',
-  background: 'Studio',
+  background: 'Desktop',
 };
 
 const App: React.FC = () => {
@@ -79,7 +78,11 @@ const App: React.FC = () => {
       }
     } catch (e) {
       console.error(e);
-      setError(t('errorTransform'));
+      if (e instanceof Error) {
+        setError(`${t('errorTransform')}\n\nDetails: ${e.message}`);
+      } else {
+        setError(`${t('errorTransform')}\n\nDetails: ${String(e)}`);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -90,18 +93,20 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans antialiased">
-      <main className="container mx-auto px-4 py-8 md:py-12">
+    <div className="min-h-screen bg-gray-900 text-white font-sans antialiased flex flex-col">
+      <main className="container mx-auto px-4 py-8 md:py-12 flex-grow flex flex-col">
         <Header />
 
         {!originalImagePreview && (
-          <ImageUploader onImageUpload={handleImageUpload} />
+          <div className="flex-grow flex items-center justify-center">
+            <ImageUploader onImageUpload={handleImageUpload} />
+          </div>
         )}
 
         {error && (
-          <div className="mt-8 text-center bg-red-900/50 border border-red-500 text-red-300 px-4 py-3 rounded-lg" role="alert">
+          <div className="mt-8 text-left bg-red-900/50 border border-red-500 text-red-300 px-4 py-3 rounded-lg" role="alert">
             <strong className="font-bold">{t('errorTitle')}: </strong>
-            <span className="block sm:inline">{error}</span>
+            <span className="block sm:inline whitespace-pre-wrap">{error}</span>
           </div>
         )}
 
@@ -116,6 +121,22 @@ const App: React.FC = () => {
 
         {originalImagePreview && !isLoading && (
           <>
+            <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button
+                    onClick={handleTransform}
+                    disabled={isLoading}
+                    className="w-full sm:w-auto flex items-center justify-center gap-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-900/50 disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-indigo-600/30"
+                >
+                    <SparklesIcon />
+                    {generatedImage ? t('regenerateButton') : t('transformButton')}
+                </button>
+                 <button
+                    onClick={resetState}
+                    className="w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-full transition-colors duration-300"
+                >
+                    {t('startOverButton')}
+                </button>
+            </div>
             <TransformOptions 
               currentOptions={figureOptions} 
               onOptionChange={setFigureOptions} 
@@ -141,12 +162,9 @@ const App: React.FC = () => {
 
       </main>
       <footer className="text-center py-6 text-gray-500 text-sm">
-        <p>{t('footerCredit')}</p>
-        <div className="mt-2">
-            <button onClick={toggleLanguage} className="text-indigo-400 hover:text-indigo-300 transition-colors">
-                {language === 'en' ? '한국어로 변경' : 'Switch to English'}
-            </button>
-        </div>
+        <button onClick={toggleLanguage} className="text-indigo-400 hover:text-indigo-300 transition-colors">
+            {language === 'en' ? '한국어로 변경' : 'Switch to English'}
+        </button>
       </footer>
     </div>
   );
