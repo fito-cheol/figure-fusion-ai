@@ -1,0 +1,5 @@
+{
+  "name": "Figure Fusion AI",
+  "description": "An AI-powered web application that transforms your uploaded images into stunning, figure-like digital art using the Gemini API. Simply upload a photo and watch as it's reimagined as a high-quality collectible figure.",
+  "requestFramePermissions": []
+}
