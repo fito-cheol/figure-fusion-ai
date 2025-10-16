@@ -9,6 +9,7 @@ import { fileToBase64 } from "./utils/fileUtils";
 import { SparklesIcon } from "./components/icons/SparklesIcon";
 import { useLanguage } from "./contexts/LanguageContext";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
+import PWAInstallButton from "./components/PWAInstallButton";
 
 const initialFigureOptions: Omit<FigureOptions, "mode"> = {
   scale: "1/7",
@@ -176,12 +177,15 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="text-center py-6 text-gray-500 text-sm">
-        <button
-          onClick={toggleLanguage}
-          className="text-indigo-400 hover:text-indigo-300 transition-colors"
-        >
-          {language === "en" ? "한국어로 변경" : "Switch to English"}
-        </button>
+        <div className="flex flex-col items-center gap-4">
+          <button
+            onClick={toggleLanguage}
+            className="text-indigo-400 hover:text-indigo-300 transition-colors"
+          >
+            {language === "en" ? "한국어로 변경" : "Switch to English"}
+          </button>
+          <PWAInstallButton className="mt-2" />
+        </div>
       </footer>
 
       <PWAInstallPrompt />
