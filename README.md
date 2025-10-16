@@ -10,11 +10,44 @@ View your app in AI Studio: https://ai.studio/apps/drive/1jxcrrPSJiPJmtAwNO9SAOs
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+
+   ```bash
+   npm install
+   ```
+
+2. Set your Gemini API key:
+
+   - Open `services/geminiService.ts`
+   - Replace `"YOUR_GEMINI_API_KEY_HERE"` with your actual Gemini API key
+   - Example: `const API_KEY = "your-actual-api-key-here";`
+
 3. Run the app:
-   `npm run dev`
+   ```bash
+   npm run dev
+   ```
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+## PWA Features
+
+This app includes Progressive Web App (PWA) functionality:
+
+- **Installable**: Can be installed on devices like a native app
+- **Offline Support**: Works offline with cached content
+- **Auto Updates**: Automatically updates when new versions are available
+- **Cross Platform**: Works on desktop, mobile, and tablet devices
+
+### Installing the App
+
+1. **Automatic Installation**: Click the "앱 설치하기" button in the footer
+2. **Manual Installation**:
+   - **Chrome/Edge**: Look for the install icon in the address bar
+   - **iOS Safari**: Tap the share button → "Add to Home Screen"
+   - **Android Chrome**: Tap the menu button → "Add to Home Screen"
