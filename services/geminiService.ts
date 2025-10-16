@@ -4,13 +4,12 @@ import { FigureOptions } from "../components/TransformOptions";
 // API 키를 직접 설정 (환경변수 대신)
 const API_KEY = "YOUR_GEMINI_API_KEY_HERE"; // 여기에 실제 API 키를 입력하세요
 
-if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-  throw new Error(
-    "Please set your Gemini API key in services/geminiService.ts"
-  );
-}
+// API 키가 설정되지 않은 경우를 처리
+let ai: GoogleGenAI | null = null;
 
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+if (API_KEY && API_KEY !== "YOUR_GEMINI_API_KEY_HERE") {
+  ai = new GoogleGenAI({ apiKey: API_KEY });
+}
 
 const getArtStyleDescription = (style: FigureOptions["artStyle"]): string => {
   switch (style) {
@@ -174,6 +173,13 @@ export const transformImageToFigure = async (
   options: FigureOptions,
   dimensions: { width: number; height: number }
 ): Promise<{ imageUrl: string | null; text: string | null }> => {
+  // API 키가 설정되지 않은 경우 에러 메시지 반환
+  if (!ai) {
+    throw new Error(
+      "Gemini API 키가 설정되지 않았습니다. services/geminiService.ts 파일에서 API_KEY를 설정해주세요."
+    );
+  }
+
   try {
     const prompt = createFigurePrompt(options, dimensions);
 
