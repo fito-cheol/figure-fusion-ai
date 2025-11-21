@@ -35,6 +35,11 @@ View your app in AI Studio: https://ai.studio/apps/drive/1jxcrrPSJiPJmtAwNO9SAOs
 npm run build
 ```
 
+## Date-fns Tester
+
+- Launch the app and select the **Date-fns Tester** tab below the header to open the parser helper view.
+- Enter an ISO string (like `2025-11-21T10:00:00Z`) or a `yyyyMMdd` string (`20251121`) and click **Parse** to log and view the parsed `Date`.
+
 ## PWA Features
 
 This app includes Progressive Web App (PWA) functionality:
