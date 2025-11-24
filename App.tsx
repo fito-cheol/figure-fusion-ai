@@ -11,6 +11,7 @@ import { useLanguage } from "./contexts/LanguageContext";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import PWAInstallButton from "./components/PWAInstallButton";
 import DateFnsTesterPage from "./components/DateFnsTesterPage";
+import KeyboardImeTesterPage from "./components/KeyboardImeTesterPage";
 
 const initialFigureOptions: Omit<FigureOptions, "mode"> = {
   scale: "1/7",
@@ -39,7 +40,7 @@ const App: React.FC = () => {
   const [figureOptions, setFigureOptions] =
     useState<Omit<FigureOptions, "mode">>(initialFigureOptions);
   const { language, setLanguage, t } = useLanguage();
-  const [activePage, setActivePage] = useState<"main" | "dateTester">("main");
+  const [activePage, setActivePage] = useState<"main" | "dateTester" | "keyboardImeTester">("main");
 
   const handleImageUpload = (file: File) => {
     setOriginalImageFile(file);
@@ -204,11 +205,26 @@ const App: React.FC = () => {
           >
             Date-fns Tester
           </button>
+          <button
+            type="button"
+            onClick={() => setActivePage("keyboardImeTester")}
+            className={`px-4 py-2 rounded-full transition font-semibold ${
+              activePage === "keyboardImeTester"
+                ? "bg-indigo-600 text-white"
+                : "bg-white/10 text-white hover:bg-white/20"
+            }`}
+          >
+            Keyboard IME Tester
+          </button>
         </div>
 
         {activePage === "dateTester" ? (
           <div className="mt-8 flex-grow flex items-center justify-center">
             <DateFnsTesterPage />
+          </div>
+        ) : activePage === "keyboardImeTester" ? (
+          <div className="mt-8 flex-grow flex items-center justify-center">
+            <KeyboardImeTesterPage />
           </div>
         ) : (
           <div className="flex-grow flex flex-col">{transformFlow}</div>
